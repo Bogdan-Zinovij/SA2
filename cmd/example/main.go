@@ -3,10 +3,11 @@ package main
 import (
 	"errors"
 	"flag"
-	"fmt"
 	"io"
 	"os"
 	"strings"
+
+	lab2 "github.com/Bogdan-Zinovij/SA2"
 )
 
 var (
@@ -14,7 +15,7 @@ var (
 	inputFile = flag.String("f", "", "File with expression to compute")
 	//Only one of the input options can be used
 
-	outputFile = flag.String("o", "", "File to write the result to") 
+	outputFile = flag.String("o", "", "File to write the result to")
 	//If outputFile is not specified, print the result to standard output
 
 	reader io.Reader
@@ -35,8 +36,8 @@ func checkInputFlags(inputExp *string, inputFile *string) error {
 
 func getFileOrCreateIfNotExist(filename string) (os.File, error) {
 	file, err := os.Open(*outputFile)
-		if err != nil && os.IsNotExist(err) {
-				file, err = os.Create(*outputFile)
+	if err != nil && os.IsNotExist(err) {
+		file, err = os.Create(*outputFile)
 	}
 	return *file, err
 }
@@ -47,11 +48,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	
-	fmt.Println(*inputExpression)
-	fmt.Println(*inputFile)
-	fmt.Println(*outputFile)
-
 
 	if *inputExpression != "" {
 		reader = strings.NewReader(*inputExpression)
@@ -75,14 +71,14 @@ func main() {
 		defer outputF.Close()
 	}
 
-	  //			handler := &lab2.ComputeHandler{
-		//      	Input: {construct io.Reader according the command line parameters},
-		//				Output: {construct io.Writer according the command line parameters},
-		//      }
-		//      err := handler.Compute()
-		//			if err != nil {
-		//			panic(err)	
-		//}
+	handler := &lab2.ComputeHandler{
+		Input: reader,
+		Output: writer,
+	}
+	
+	e := handler.Compute()
+	if e != nil {
+		panic(e)
+	}
 
 }
-
