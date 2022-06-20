@@ -9,13 +9,13 @@ import (
 // ComputeHandler should be constructed with input io.Reader and output io.Writer.
 // Its Compute() method should read the expression from input and write the computed result to the output.
 type ComputeHandler struct {
-	input  io.Reader
-	output io.Writer
+	Input  io.Reader
+	Output io.Writer
 }
 
 func (ch *ComputeHandler) Compute() error {
 	var slice = make([]byte, 64)
-	_, readErr := ch.input.Read(slice)
+	_, readErr := ch.Input.Read(slice)
 
 	str := strings.Trim(string(slice), "\x00")
 
@@ -28,7 +28,7 @@ func (ch *ComputeHandler) Compute() error {
 		return convertErr
 	}
 
-	_, writeErr := ch.output.Write([]byte(res))
+	_, writeErr := ch.Output.Write([]byte(res))
 	if writeErr != nil {
 		return writeErr
 	}

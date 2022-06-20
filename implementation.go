@@ -1,7 +1,6 @@
 package lab2
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -18,5 +17,5 @@ func PostfixToPrefix(inputExpression string) (string, error) {
 		}
 	}
 
-	return symbols[0], fmt.Errorf("TODO")
+	return symbols[0], nil
 }
