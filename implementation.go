@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-var signs = "-+/*^"
+const signs = "-+/*^"
 
 func validateInputExpression(inputExp []string) error {
 
