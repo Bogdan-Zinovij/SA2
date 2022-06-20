@@ -2,6 +2,7 @@ package lab2
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -10,12 +11,10 @@ const signs = "-+/*^"
 
 func validateInputExpression(inputExp []string) error {
 
-
-	var validationErrStr = "validation error: "
 	var signsCounter, numbersCounter int
 
 	if inputExp[0] == "" {
-		return errors.New(validationErrStr + "expression is not specified")
+		return errors.New("expression is not specified")
 	}
 
 	for _, symbol := range inputExp {
@@ -30,11 +29,11 @@ func validateInputExpression(inputExp []string) error {
 			continue
 		}
 
-		return errors.New(validationErrStr + "invalid symbol specified")
+		return errors.New("invalid symbol specified")
 	}
 
 	if numbersCounter != signsCounter + 1 {
-		return errors.New(validationErrStr + "invalid expression specified")
+		return errors.New("invalid expression specified")
 	}
 	
 	return nil
@@ -45,7 +44,7 @@ func PostfixToPrefix(inputExpression string) (string, error) {
 	symbols := strings.Split(inputExpression, " ")
 	validationErr := validateInputExpression(symbols)
 	if validationErr != nil {
-		return "", validationErr
+		return "", fmt.Errorf("validation error: %v", validationErr)
 	}
 	for i := 0; i < len(symbols); i++ {
 		if strings.Contains(signs, symbols[i]) {
