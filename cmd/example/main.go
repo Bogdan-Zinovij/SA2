@@ -12,7 +12,7 @@ import (
 
 var (
 	inputExpression = flag.String("e", "", "Expression to compute")
-	inputFile = flag.String("f", "", "File with expression to compute")
+	inputFile       = flag.String("f", "", "File with expression to compute")
 	//Only one of the input options can be used
 
 	outputFile = flag.String("o", "", "File to write the result to")
@@ -72,10 +72,10 @@ func main() {
 	}
 
 	handler := &lab2.ComputeHandler{
-		Input: reader,
+		Input:  reader,
 		Output: writer,
 	}
-	
+
 	e := handler.Compute()
 	if e != nil {
 		panic(e)

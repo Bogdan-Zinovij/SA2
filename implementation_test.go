@@ -8,7 +8,7 @@ import (
 )
 
 func TestPostfixToPrefix(t *testing.T) {
-	cases := map[string]string {
+	cases := map[string]string{
 		"1 2 +":                                 "+ 1 2",
 		"1 2 3 * +":                             "+ 1 * 2 3",
 		"4 2 / 5 4 * 3 + /":                     "/ / 4 2 + * 5 4 3",
