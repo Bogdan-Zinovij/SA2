@@ -11,7 +11,7 @@ import (
 func TestOutputWriting(t *testing.T) {
 	cases := map[string]string{
 		"4 2 - 3 * 5 +":             "+ * - 4 2 3 5",
-		"4 2 - 3 * 5 + 5 5 5 - - +": "+ + * - 4 2 3 5 - 5 - 5 5",
+		"4 2 - 3 * 5 + 5 5 5 - - +": "+ + * - 4 2 3 5 - 5 - 5 ",
 	}
 
 	for inputData, outputData := range cases {
