@@ -22,3 +22,20 @@ func TestOutputWriting(t *testing.T) {
 		assert.Equal(t, output.String(), outputData)
 	}
 }
+
+func TestComputeInvalidSyntaxError(t *testing.T) {
+	cases := []string{
+		"4 2- 3* 5 +",
+		"4 2 & 6 * 9",
+		"",
+		"err 2 - 3 * 5 +",
+	}
+
+	for _, inputExp := range cases {
+		input := strings.NewReader(inputExp)
+		output := new(bytes.Buffer)
+		handler := ComputeHandler{input, output}
+		err := handler.Compute()
+		assert.NotNil(t, err)
+	}
+}

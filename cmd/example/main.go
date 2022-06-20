@@ -4,6 +4,7 @@ import (
 	"errors"
 	"flag"
 	"io"
+	"log"
 	"os"
 	"strings"
 
@@ -36,17 +37,17 @@ func checkInputFlags(inputExp *string, inputFile *string) error {
 
 func main() {
 	flag.Parse()
-	err := checkInputFlags(inputExpression, inputFile)
-	if err != nil {
-		panic(err)
+	inputFlagsErr := checkInputFlags(inputExpression, inputFile)
+	if inputFlagsErr != nil {
+		log.Fatalf("Wrong flags: %s", inputFlagsErr)
 	}
 
 	if *inputExpression != "" {
 		reader = strings.NewReader(*inputExpression)
 	} else {
-		inputF, err := os.Open(*inputFile)
-		if err != nil {
-			panic(err)
+		inputF, openFileErr := os.Open(*inputFile)
+		if openFileErr != nil {
+			log.Fatalf("Cannot open specified file: %s", openFileErr)
 		}
 		reader = inputF
 		defer inputF.Close()
@@ -55,9 +56,9 @@ func main() {
 	if *outputFile == "" {
 		writer = os.Stdout
 	} else {
-		createdFile, err := os.Create(*outputFile)
-		if err != nil {
-			panic(err)
+		createdFile, createFileErr := os.Create(*outputFile)
+		if createFileErr != nil {
+			log.Fatalf("Cannot create file: %s", createFileErr)
 		}
 		writer = createdFile
 		defer createdFile.Close()
@@ -68,9 +69,8 @@ func main() {
 		Output: writer,
 	}
 
-	e := handler.Compute()
-	if e != nil {
-		panic(e)
+	computeHandlerErr := handler.Compute()
+	if computeHandlerErr != nil {
+		log.Fatalf("Error during computing: %s", computeHandlerErr)
 	}
-
 }
