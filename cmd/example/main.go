@@ -34,14 +34,6 @@ func checkInputFlags(inputExp *string, inputFile *string) error {
 	return nil
 }
 
-func getFileOrCreateIfNotExist(filename string) (os.File, error) {
-	file, err := os.Open(*outputFile)
-	if err != nil && os.IsNotExist(err) {
-		file, err = os.Create(*outputFile)
-	}
-	return *file, err
-}
-
 func main() {
 	flag.Parse()
 	err := checkInputFlags(inputExpression, inputFile)
@@ -63,12 +55,12 @@ func main() {
 	if *outputFile == "" {
 		writer = os.Stdout
 	} else {
-		outputF, err := getFileOrCreateIfNotExist(*outputFile)
+		createdFile, err := os.Create(*outputFile)
 		if err != nil {
 			panic(err)
 		}
-		writer = &outputF
-		defer outputF.Close()
+		writer = createdFile
+		defer createdFile.Close()
 	}
 
 	handler := &lab2.ComputeHandler{
