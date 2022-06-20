@@ -1,7 +1,6 @@
 package lab2
 
 import (
-	// "fmt"
 	"io"
 	"strings"
 )
@@ -21,13 +20,12 @@ type ComputeHandler struct {
 func (ch *ComputeHandler) Compute() error {
 	var slice = make([]byte, 64)
 	_, readErr := ch.Input.Read(slice)
-
-	inputStr := string(slice)
-	inputStr = processInputStr(inputStr)
-
 	if readErr != nil {
 		return readErr
 	}
+
+	inputStr := string(slice)
+	inputStr = processInputStr(inputStr)
 
 	res, convertErr := PostfixToPrefix(inputStr)
 	if convertErr != nil {
