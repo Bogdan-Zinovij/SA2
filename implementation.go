@@ -32,7 +32,7 @@ func validateInputExpression(inputExp []string) error {
 		return errors.New("invalid symbol specified")
 	}
 
-	if numbersCounter != signsCounter + 1 {
+	if numbersCounter != signsCounter + 1 || len(inputExp) < 3 {
 		return errors.New("invalid expression specified")
 	}
 	
