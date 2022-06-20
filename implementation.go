@@ -1,14 +1,52 @@
 package lab2
 
 import (
+	"errors"
+	"strconv"
 	"strings"
 )
 
-// TODO: document this function.
+const signs = "-+/*^"
+
+func validateInputExpression(inputExp []string) error {
+
+
+	var validationErrStr = "validation error: "
+	var signsCounter, numbersCounter int
+
+	if inputExp[0] == "" {
+		return errors.New(validationErrStr + "expression is not specified")
+	}
+
+	for _, symbol := range inputExp {
+		_, err := strconv.ParseFloat(symbol, 64) // check if symbol is a number
+		if err == nil {
+			numbersCounter++
+			continue
+		}
+
+		if (strings.Contains(signs, symbol)) { // check if symbol is a sign
+			signsCounter++
+			continue
+		}
+
+		return errors.New(validationErrStr + "invalid symbol specified")
+	}
+
+	if numbersCounter != signsCounter + 1 {
+		return errors.New(validationErrStr + "invalid expression specified")
+	}
+	
+	return nil
+}
+
 // Postfix to Prefix converts
 func PostfixToPrefix(inputExpression string) (string, error) {
 	symbols := strings.Split(inputExpression, " ")
-	signs := "-+/*^"
+	validationErr := validateInputExpression(symbols)
+	if validationErr != nil {
+		return "", validationErr
+	}
 	for i := 0; i < len(symbols); i++ {
 		if strings.Contains(signs, symbols[i]) {
 			symbols[i-2] = symbols[i] + " " + symbols[i-2] + " " + symbols[i-1]

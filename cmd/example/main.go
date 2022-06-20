@@ -24,7 +24,7 @@ var (
 
 func checkInputFlags(inputExp *string, inputFile *string) error {
 	if *inputExp == "" && *inputFile == "" {
-		return errors.New("expression is not set")
+		return errors.New("expression is not specified")
 	}
 
 	if *inputExp != "" && *inputFile != "" {
