@@ -23,10 +23,10 @@ go run cmd/example/main.go
 
 - Для вводу виразу:
   - Ввести вираз у консолі:
-    ```sh
+  ```sh
     -e "expression"
-    ```
-    АБО
+  ```
+  АБО
   - Вказати файл з виразом:
   ```sh
     -f "file.txt"
@@ -48,7 +48,7 @@ make test
 
 - Неуспішні збірки:
 
-  - Commit/push - https://github.com/Bogdan-Zinovij/SA2/actions/runs/2534461938
+  - Commit/push - https://github.com/Bogdan-Zinovij/SA2/actions/runs/2534476020
   - Pull request - https://github.com/Bogdan-Zinovij/SA2/actions/runs/2531166285
 
 - Успішні збірки:
