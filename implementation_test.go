@@ -11,8 +11,8 @@ import (
 func TestPostfixToPrefix(t *testing.T) {
 	cases := map[string]string{
 		"1 2 +":                                 "+ 1 2",
-		"1 2 3 * ":                              "+ 1 * 2 3",
-		"4 2 / 5 4 * 3 + ":                      "/ / 4 2 + * 5 4 3",
+		"1 2 3 * +":                             "+ 1 * 2 3",
+		"4 2 / 5 4 * 3 + /":                     "/ / 4 2 + * 5 4 3",
 		"3 4 + 1 - 6 5 - 2.0 8 7 + * / ^":       "^ - + 3 4 1 / - 6 5 * 2.0 + 8 7",
 		"1 2 3 + + 4 - 5 + 8 ^ 3 7 * ^ 2 2 + -": "- ^ ^ + - + 1 + 2 3 4 5 8 * 3 7 + 2 2",
 		"":                                      "validation error: expression is not specified",
@@ -41,5 +41,5 @@ func ExamplePostfixToPrefix() {
 	} else {
 		fmt.Println(res)
 	}
-	// Output: "- * + 1 3 5 * 2 4"
+	// Output: - * + 1 3 5 * 2 4
 }
