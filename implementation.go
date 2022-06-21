@@ -39,7 +39,7 @@ func validateInputExpression(inputExp []string) error {
 	return nil
 }
 
-// Postfix to Prefix converts
+//Converts a mathematical  expression from Postfix to Prefix form
 func PostfixToPrefix(inputExpression string) (string, error) {
 	symbols := strings.Split(inputExpression, " ")
 	validationErr := validateInputExpression(symbols)

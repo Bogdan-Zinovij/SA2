@@ -33,6 +33,7 @@ func TestPostfixToPrefix(t *testing.T) {
 	}
 }
 
+//Converts the mathematical postfix  expression "1 3 + 5 * 2 4 * -" to prefix form
 func ExamplePostfixToPrefix() {
 	res, err := PostfixToPrefix("1 3 + 5 * 2 4 * -")
 	if err != nil {
@@ -40,4 +41,5 @@ func ExamplePostfixToPrefix() {
 	} else {
 		fmt.Println(res)
 	}
+	// Output: "- * + 1 3 5 * 2 4"
 }
