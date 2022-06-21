@@ -73,5 +73,4 @@ func main() {
 	if computeHandlerErr != nil {
 		log.Fatalf("Error during computing: %s", computeHandlerErr)
 	}
-
 }
